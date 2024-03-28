@@ -1,0 +1,46 @@
+<h1 class="text-3xl font-semibold mb-4">Landing Page</h1>
+<p> Please log into the relevant account  (see db:seed)</p>
+
+<h2 class="text-2xl font-semibold mb-4">Admin:</h2>
+
+<ul class="list-disc pl-6">
+  <li class="mb-4">
+    <p class="text-lg">Can perform all tasks such as upload/edit/delete videos, upload/edit/delete thumbnail</p>
+  </li>
+  <li class="mb-4">
+    <p class="text-lg">Can create / edit / delete organisations <span class="text-sm text-gray-500">(Bonus)</span></p>
+  </li>
+  <li>
+    <p class="text-lg">Can add/delete users <span class="text-sm text-gray-500">(Bonus)</span></p>
+  </li>
+</ul>
+
+<h2 class="text-2xl font-semibold mb-4">Staff:</h2>
+
+<ul class="list-disc pl-6">
+  <li class="mb-4">
+    <p class="text-lg">Staff can view all pages but can only edit/upload thumbnails</p>
+  </li>
+  <li class="mb-4">
+    <p class="text-lg">Staff should not be able to delete any object</p>
+  </li>
+  <li class="mb-4">
+    <p class="text-lg">Staff can edit organisation details <span class="text-sm text-gray-500">(Bonus)</span></p>
+  </li>
+  <li>
+    <p class="text-lg">Staff can edit users details but can’t delete them
+      <span class="text-sm text-gray-500">(Bonus)</span></p>
+  </li>
+</ul>
+
+<div class="bg-gray-200 p-4">
+<% unless current_user %>
+  <%= link_to "login", new_user_session_path, class: "no-underline bg-blue-500 text-white py-2 px-4" %>
+<% else %>
+  <p> To view your organisation and add and upload videos please sign in</p>
+  <%= link_to "View Organisation", organisations_path,
+              class: "bg-blue-500 text-white py-2 px-4 no-underline" %>
+  <%= link_to "View Video", videos_path,
+              class: "bg-blue-500 text-white py-2 px-4 no-underline" %>
+<% end %>
+</div>

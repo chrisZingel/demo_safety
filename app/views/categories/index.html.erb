@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Categories</h1>
+
+<%= turbo_frame_tag @video do %>
+  <ul class="list-none">
+    <% @video.categories.each do |category| %>
+      <li class="inline-block bg-gray-200 rounded-full px-4 py-2 m-1"><%= category.name %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= turbo_frame_tag Category.new do %>
+  <%= link_to "New category", new_video_category_path(@video) %>
+<% end %>

@@ -1,0 +1,46 @@
+<p style="color: green"><%= notice %></p>
+
+<div data-controller="watch-video">
+  <h2>
+    <strong>Description: </strong><%= @video.description %>
+  </h2>
+
+  <%= turbo_frame_tag "categories_for_#{@video.id}"  do %>
+    <div class="bg-blue-50 p-4 ">
+      <% unless @video.categories.empty? %>
+        <ul class="list-none">
+          <% @video.categories.each do |category| %>
+            <li class="inline-block bg-gray-200 rounded-full px-4 py-2 m-1"><%= category.name %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= turbo_frame_tag Category.new do %>
+    <div class= "my-4">
+    <%= link_to "add new category", new_video_category_path(@video), class: " bg-blue-500 py-2 px-4 text-white no-underline" %>
+    </div>
+  <% end %>
+
+  <% if @video.file[:video].present? %>
+    <div>
+      <video
+        id="my-player"
+        class="video-js"
+        controls
+        preload="auto"
+        poster="<%= @video.file[:screenshot].url %>"
+        data-setup='{}'>
+        <source src="<%= @video.file[:video].url %>"></source>
+      </video>
+    </div>
+  <% end %>
+</div>
+
+<div class="bg-gray-200 p-4 my-20">
+  <%= link_to "Edit this video", edit_video_path(@video), class: "bg-blue-500 text-white py-2 px-4 no-underline" %>
+  <%= link_to "Back to videos", videos_path, class: "bg-blue-500 text-white py-2 px-4 no-underline" %>
+  <%= button_to "Destroy this video", @video, method: :delete, class: "bg-blue-500 text-white py-2 px-4 no-underline" %>
+</div>
+

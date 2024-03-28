@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Videos</h1>
+
+<div class="grid grid-cols-3 gap-4">
+  <% @videos.each do |video| %>
+    <%= link_to video_url(video), class: "group" do %>
+      <img src="<%= video.file[:screenshot].url %>" alt="Thumbnail 1" class=" w-40 h-60  rounded-lg hover:opacity-75 transition duration-300">
+      <p class="text-center text-gray-700 group-hover:text-gray-900 transition duration-300"><%= video.description %></p>
+    <% end %>
+  <% end %>
+</div>
+
+<%= link_to "New video", new_video_path, class: "bg-blue-500 text-white py-2 px-4 no-underline" %>

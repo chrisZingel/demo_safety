@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Safetyhub</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+  <link href="//vjs.zencdn.net/8.3.0/video-js.min.css" rel="stylesheet">
+</head>
+
+
+<body class="bg-gray-100">
+<!-- Top Toolbar -->
+<div class="bg-blue-500 text-white py-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <div class="flex items-center">
+      <span class="text-xl font-semibold">My Home Work Assignment</span>
+    </div>
+    <div>
+      <% if user_signed_in? %>
+        <%= button_to "Logout", destroy_user_session_url, class: "px-4 py-2 bg-white text-blue-500 font-semibold rounded-full hover:bg-blue-200", method: :delete %>
+      <% else %>
+        <%= button_to "Sign in", new_user_session_url, class: "px-4 py-2 bg-white text-blue-500 font-semibold rounded-full hover:bg-blue-200", method: :get %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% flash.each do |type, message| %>
+  <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">
+    <%= message %>
+  </div>
+<% end %>
+
+<!-- Content Area -->
+<div class="container mx-auto py-8">
+  <div class="max-w-2xl mx-auto bg-white p-6 shadow-md rounded-md">
+
+    <div class="prose">
+      <%= yield %>
+    </div>
+  </div>
+</div>
+</body>
+</html>

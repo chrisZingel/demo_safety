@@ -1,0 +1,3 @@
+class OrganisationPolicy < ApplicationPolicy
+
+end
